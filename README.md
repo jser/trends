@@ -3,6 +3,7 @@
 JSer.infoで紹介した記事を元にしたトレンドビューア
 
 - 期間とキーワードをして記事中に登場した回数を表示
+- データの解析ライブラリとして[jser/stat-js](https://github.com/jser/stat-js "jser/stat-js")を利用
 
 ## Installation
 
@@ -10,6 +11,9 @@ JSer.infoで紹介した記事を元にしたトレンドビューア
 
 ## Usage
 
+以下のページにアクセス
+
+- [JSer.info トレンド](http://jser.info/trends/ "JSer.info トレンド")
     
 ## Contributing
 
