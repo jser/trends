@@ -27,7 +27,7 @@
   ],
   "description": "trend viewer on jser.info",
   "dependencies": {
-    "c3": "^0.4.11-rc4",
+    "c3": "masayuki0812/c3",
     "jser-stat": "^2.0.0",
     "material-flux": "^1.3.1",
     "moment": "^2.10.6",
@@ -45,7 +45,6 @@
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "gh-pages-deploy-sh": "^1.2.11",
-    "moment-range": "^2.0.3",
     "watchify": "^3.6.1"
   }
 }
