@@ -19,7 +19,7 @@
   "scripts": {
     "build": "browserify src/index.js -v -t babelify -o build.js",
     "watch": "watchify src/index.js -v -d -t babelify -o build.js",
-    "deploy": "gh-pages-deploy-sh"
+    "deploy": "gh-pages-deploy-sh ./"
   },
   "keywords": [
     "jser",
