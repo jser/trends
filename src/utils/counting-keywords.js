@@ -24,13 +24,14 @@ export default class Counting {
             var startDate = moment(d).startOf("month").toDate();
             var endDate = moment(d).endOf('month').toDate();
             keywords.forEach(keyword => {
-                let count = this.countingKeyword(keyword, startDate, endDate);
+                let matchItems = this.countingKeyword(keyword, startDate, endDate);
                 if (!results[keyword]) {
                     results[keyword] = [];
                 }
                 results[keyword].push({
                     date: moment(startDate).format("YYYY-MM-DD"),
-                    count: count
+                    count: matchItems.length,
+                    items: matchItems
                 });
             });
         });
@@ -38,7 +39,7 @@ export default class Counting {
     }
 
     countingKeyword(keyword, beginDate, endDate) {
-        let count = 0;
+        let matchItems = [];
         let items = this.jserStat.getItemsBetWeen(beginDate, endDate);
         items.forEach(function (item) {
             let lowerKey = keyword.toLowerCase();
@@ -46,13 +47,13 @@ export default class Counting {
                 return tag.toLowerCase().includes(lowerKey);
             });
             if (containedTag) {
-                count++;
+                matchItems.push(item);
                 return;
             }
             if (item.title.toLowerCase().includes(lowerKey) || item.content.toLowerCase().includes(lowerKey)) {
-                count++;
+                matchItems.push(item);
             }
         });
-        return count;
+        return matchItems;
     }
 }
