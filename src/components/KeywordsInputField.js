@@ -37,7 +37,7 @@ export default class KeywordsInputField extends React.Component {
             return <KeywordInput key={keyword + index} value={keyword} onChange={this.onChange.bind(this, index)}/>
         });
         return <div className="KeywordsInputField">
-            <span>キーワードu:</span>
+            <span>キーワード:</span>
             <form onSubmit={this.onSubmit.bind(this)}>
                 {inputs}
                 <input type="button" onClick={this.onAddKeyword.bind(this)} value="キーワードを追加"/>
