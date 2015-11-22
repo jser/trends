@@ -32,8 +32,8 @@ fetchStat().then(stat => {
 
         static calculateState() {
             return {
-                dateStore: context.dateStore.getState(),
-                keywordsStore: context.keywordsStore.getState()
+                dateStore: context.dateStore.state,
+                keywordsStore: context.keywordsStore.state
             };
         }
 
@@ -57,7 +57,7 @@ fetchStat().then(stat => {
         }
     }
 
-    const AppContainer = Container.create(App);
+    const AppContainer = Container.create(App, {pure: true});
     render(
         <AppContainer />,
         document.getElementById('app')

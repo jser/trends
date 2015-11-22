@@ -1,9 +1,29 @@
 // LICENSE : MIT
+// Original from http://facebook.github.io/flux/docs/flux-utils.html#container
 "use strict";
 import FluxStoreGroup from "./FluxStoreGroup";
+import assert from "assert";
+function enforceInterface(o) {
+    assert(
+        o.getStores,
+        'Components that use Container must implement `static getStores()`'
+    );
+    assert(
+        o.calculateState,
+        'Components that use Container must implement `static calculateState()`'
+    );
+}
+
 export default class Container {
+    /**
+     * Create Container of Base Component and return Container Component.
+     * @param Base
+     * @returns {React.Component}
+     */
     static create(Base) {
-        return class ContainerComponent extends Base {
+        enforceInterface(Base);
+        // define as Container class
+        class ContainerComponent extends Base {
             constructor(props) {
                 super(props);
                 this.state = Base.calculateState(null, props);
@@ -47,6 +67,7 @@ export default class Container {
                 if (super.componentWillReceiveProps) {
                     super.componentWillReceiveProps(nextProps, nextContext);
                 }
+                // TODO: pure options?
 
                 // Finally update the state using the new props.
                 this.setState(prevState => Base.calculateState(prevState, nextProps));
@@ -64,5 +85,10 @@ export default class Container {
                 this._fluxContainerSubscriptions = [];
             }
         }
+
+        // Update the name of the container before returning.
+        var componentName = Base.displayName || Base.name;
+        ContainerComponent.displayName = 'Container(' + componentName + ')';
+        return ContainerComponent;
     }
 }
