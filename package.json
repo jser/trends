@@ -19,7 +19,7 @@
   "scripts": {
     "build": "browserify src/index.js -v -t babelify -o build.js",
     "watch": "watchify src/index.js -v -d -t babelify -o build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages-deploy-sh"
   },
   "keywords": [
     "jser",
@@ -44,6 +44,7 @@
     "babel-preset-react": "^6.1.18",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
+    "gh-pages-deploy-sh": "^1.2.11",
     "moment-range": "^2.0.3",
     "watchify": "^3.6.1"
   }
