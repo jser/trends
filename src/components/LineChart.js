@@ -77,6 +77,9 @@ export default class LineChart extends React.Component {
     render() {
         return <div className="LineChart">
             <div id="chart"></div>
+            <p className="description">
+                縦軸はJSer.infoでキーワードを紹介した回数/横軸は年月
+            </p>
         </div>
     }
 }

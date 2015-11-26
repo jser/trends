@@ -2,7 +2,7 @@
 "use strict";
 import React from "react"
 import moment from "moment";
-export default class DateRangeInput extends React.Component {
+export default class DateRangeInputField extends React.Component {
     onBegin(evt) {
         this.props.onChangeBegin(evt.target.value);
     }
@@ -12,7 +12,7 @@ export default class DateRangeInput extends React.Component {
     }
 
     render() {
-        return <div className="DateRangeInput">
+        return <div className="DateRangeInputField">
             <div>
                 開始日: <input type="date" defaultValue={moment(this.props.beginDate).format("YYYY-MM-DD")}
                             onChange={this.onBegin.bind(this)}/>

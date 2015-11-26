@@ -6,7 +6,7 @@ import AppContext from "./AppContext";
 const context = new AppContext();
 import Container from "./Container";
 import LineChart from "./components/LineChart";
-import DateRangeInput from "./components/DateRangeInput";
+import DateRangeInputField from "./components/DateRangeInputField";
 import KeywordsInputField from "./components/KeywordsInputField";
 import DataTableView from "./components/DataTableView";
 import Counting from "./utils/counting-keywords"
@@ -43,8 +43,8 @@ fetchStat().then(stat => {
                 return keyword.length > 0
             });
             var chartData = counting.countingKeywords(usedKeywords, this.state.dateStore.beginDate, this.state.dateStore.endDate);
-            return <div>
-                <DateRangeInput
+            return <div className="App">
+                <DateRangeInputField
                     beginDate={this.state.dateStore.beginDate} endDate={this.state.dateStore.endDate}
                     onChangeBegin={dateAction.beginDate} onChangeEnd={dateAction.endDate}/>
                 <KeywordsInputField keywords={this.state.keywordsStore.keywords}
