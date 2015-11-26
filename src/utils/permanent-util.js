@@ -13,5 +13,5 @@ export function stateToQuery(state) {
     });
 }
 export function queryToState(query) {
-    return stateToQuery.parse(query)
+    return querystring.parse(query)
 }
