@@ -8,10 +8,11 @@ import Container from "./Container";
 import LineChart from "./components/LineChart";
 import DateRangeInputField from "./components/DateRangeInputField";
 import KeywordsInputField from "./components/KeywordsInputField";
+import PermanentLink from "./components/PermanentLink";
 import DataTableView from "./components/DataTableView";
 import Counting from "./utils/counting-keywords"
 import fetchStat from "./utils/fetch-jser-stat";
-
+import {stateToQuery} from "./utils/permanent-util";
 // loading
 render(
     <div>
@@ -42,6 +43,15 @@ fetchStat().then(stat => {
             let usedKeywords = this.state.keywordsStore.keywords.filter(keyword => {
                 return keyword.length > 0
             });
+            let permanent = ()=> {
+                let state = {
+                    beginDate: this.state.dateStore.beginDate,
+                    endDate: this.state.dateStore.endDate,
+                    keywords: this.state.keywordsStore.keywords
+                };
+                let query = stateToQuery(state);
+                console.log(query);
+            };
             var chartData = counting.countingKeywords(usedKeywords, this.state.dateStore.beginDate, this.state.dateStore.endDate);
             return <div className="App">
                 <DateRangeInputField
@@ -51,6 +61,7 @@ fetchStat().then(stat => {
                                     onUpdateKeywords={keywordsAction.updateKeywords}
                                     onAddKeyword={keywordsAction.addKeyword}
                 />
+                <PermanentLink onClick={permanent}/>
                 <LineChart data={chartData}/>
                 <DataTableView data={chartData}/>
             </div>
