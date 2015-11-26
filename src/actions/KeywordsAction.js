@@ -5,7 +5,7 @@ export const ON_ADD_KEYWORD = Symbol("キーワード追加");
 export default function KeywordsAction(context) {
     let dispatch = context.dispatch.bind(context);
     return new class {
-        updateKeywords(keywords) {
+        updateKeywords(keywords = []) {
             dispatch(ON_UPDATE_KEYWORDS, keywords);
         }
 

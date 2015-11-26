@@ -3,15 +3,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import AppContext from "./AppContext";
-const context = new AppContext();
 import Container from "./Container";
 import LineChart from "./components/LineChart";
 import DateRangeInputField from "./components/DateRangeInputField";
 import KeywordsInputField from "./components/KeywordsInputField";
+import PermanentLink from "./components/PermanentLink";
 import DataTableView from "./components/DataTableView";
 import Counting from "./utils/counting-keywords"
 import fetchStat from "./utils/fetch-jser-stat";
-
+import {stateToQuery, queryToState} from "./utils/permanent-util";
+const context = new AppContext();
 // loading
 render(
     <div>
@@ -19,6 +20,24 @@ render(
     </div>,
     document.getElementById('app')
 );
+// get permanent hash
+(() => {
+    let hash = location.hash.replace(/^#/,"");
+    let {
+        beginDate,
+        endDate,
+        keywords
+        } = queryToState(hash);
+    if (beginDate) {
+        context.dateAction.beginDate(beginDate);
+    }
+    if (endDate) {
+        context.dateAction.endDate(endDate);
+    }
+    if (keywords) {
+        context.keywordsAction.updateKeywords(keywords);
+    }
+})();
 // fetch and draw
 fetchStat().then(stat => {
     let counting = new Counting(stat);
@@ -42,6 +61,14 @@ fetchStat().then(stat => {
             let usedKeywords = this.state.keywordsStore.keywords.filter(keyword => {
                 return keyword.length > 0
             });
+            let changePermanent = ()=> {
+                let state = {
+                    beginDate: this.state.dateStore.beginDate,
+                    endDate: this.state.dateStore.endDate,
+                    keywords: this.state.keywordsStore.keywords
+                };
+                location.hash = stateToQuery(state)
+            };
             var chartData = counting.countingKeywords(usedKeywords, this.state.dateStore.beginDate, this.state.dateStore.endDate);
             return <div className="App">
                 <DateRangeInputField
@@ -51,6 +78,7 @@ fetchStat().then(stat => {
                                     onUpdateKeywords={keywordsAction.updateKeywords}
                                     onAddKeyword={keywordsAction.addKeyword}
                 />
+                <PermanentLink onClick={changePermanent}/>
                 <LineChart data={chartData}/>
                 <DataTableView data={chartData}/>
             </div>
