@@ -7,7 +7,7 @@ function fetchURL(URL) {
         req.open('GET', URL);
         req.onload = function () {
             if (req.status >= 200 && req.status < 300) {
-                resolve(req.response);
+                resolve(JSON.parse(req.response));
             } else {
                 reject(Error(req.statusText));
             }
@@ -18,17 +18,29 @@ function fetchURL(URL) {
         req.send();
     });
 }
+function fetchData() {
+    if (process.env.NODE_ENV === 'development') {
+        return new Promise((resolve) => {
+            resolve([
+                require("jser-stat/data/posts"),
+                require("jser-stat/data/items")
+            ])
+        });
+    } else {
+        return Promise.all([
+            fetchURL("http://jser.info/posts.json"),
+            fetchURL("http://jser.info/source-data/items.json")
+        ]);
+    }
+}
 export default function fetchStat() {
     // APIで取ってくる方式
     if (fetchStat._jSerStat) {
         return Promise.resolve(fetchStat._jSerStat);
     }
-    return Promise.all([
-        fetchURL("http://jser.info/posts.json"),
-        fetchURL("http://jser.info/source-data/items.json")
-    ]).then(function (results) {
-        var posts = JSON.parse(results[0]).reverse();
-        var items = JSON.parse(results[1]);
+    return fetchData().then(function (results) {
+        var posts = results[0].reverse();
+        var items = results[1];
         var jSerStat = new JSerStat(items, posts);
         fetchStat._jSerStat = jSerStat;
         return jSerStat;

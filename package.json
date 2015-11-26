@@ -17,8 +17,8 @@
     "test": "test"
   },
   "scripts": {
-    "build": "browserify src/index.js -v -t babelify -o build.js",
-    "watch": "watchify src/index.js -v -d -t babelify -o build.js",
+    "build": "NODE_ENV=production browserify src/index.js -v -t babelify -t envify -t uglifyify -o build.js",
+    "watch": "NODE_ENV=development watchify src/index.js -v -d -t babelify -t envify -o build.js",
     "deploy": "npm run build && gh-pages-deploy-sh ./"
   },
   "keywords": [
@@ -44,7 +44,9 @@
     "babel-preset-react": "^6.1.18",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
+    "envify": "^3.4.0",
     "gh-pages-deploy-sh": "^1.2.11",
+    "uglifyify": "^3.0.1",
     "watchify": "^3.6.1"
   }
 }
