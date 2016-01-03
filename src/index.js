@@ -27,7 +27,8 @@ render(
     let {
         beginDate,
         endDate,
-        keywords
+        keywords,
+        embed
         } = queryToState(hash);
     if (beginDate) {
         context.dateAction.beginDate(beginDate);
@@ -37,6 +38,9 @@ render(
     }
     if (keywords) {
         context.keywordsAction.updateKeywords(keywords);
+    }
+    if(embed) {
+        context.keywordsAction.enterEmbedMode();
     }
 })();
 // fetch and draw
