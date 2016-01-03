@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import AppContext from "./AppContext";
-import Container from "./Container";
+import Container from "material-flux-container";
 import LineChart from "./components/LineChart";
 import DateRangeInputField from "./components/DateRangeInputField";
 import KeywordsInputField from "./components/KeywordsInputField";
