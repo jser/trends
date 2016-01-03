@@ -13,10 +13,6 @@ export default class KeywordsStore extends Store {
         this.register(ON_ADD_KEYWORD, this.onAddKeyword);
     }
 
-    getState() {
-        return ObjectAssign({}, this.state);
-    }
-
     onUpdateKeywords(keywords) {
         this.setState({keywords});
     }

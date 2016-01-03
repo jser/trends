@@ -15,10 +15,6 @@ export default class DateStore extends Store {
         this.register(ON_END_DATE, this.onEndDate);
     }
 
-    getState() {
-        return ObjectAssign({}, this.state);
-    }
-
     onBeginDate(beginDate) {
         this.setState({beginDate});
     }
