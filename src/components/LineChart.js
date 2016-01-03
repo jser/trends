@@ -43,7 +43,14 @@ export default class LineChart extends React.Component {
                 columns: data
             },
             axis: {
+                y: {
+                    label: {
+                        text: 'キーワードを紹介した回数',
+                        position: 'outer-middle'
+                    }
+                },
                 x: {
+                    label: '年月',
                     type: 'timeseries',
                     tick: {
                         format: '%Y-%m'
@@ -83,6 +90,12 @@ export default class LineChart extends React.Component {
     }
 
     render() {
+        const {embedMode} = this.props;
+        if (embedMode) {
+            return <div className="LineChart">
+                <div id="chart"></div>
+            </div>
+        }
         return <div className="LineChart">
             <div id="chart"></div>
             <p className="description">
