@@ -50,6 +50,14 @@ export default class LineChart extends React.Component {
                     }
                 }
             },
+            grid: {
+                x: {
+                    show: true
+                },
+                y: {
+                    show: true
+                }
+            },
             unload: keywords
         })
     }
