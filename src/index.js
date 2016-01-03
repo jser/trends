@@ -75,7 +75,8 @@ fetchStat().then(stat => {
                     keywords: this.state.keywordsStore.keywords,
                     embed: true
                 };
-                location.hash = stateToQuery(state)
+                const hash = stateToQuery(state);
+                window.open(`${location.href}#${hash}`, '_blank');
             };
             const changePermanent = () => {
                 let state = {
