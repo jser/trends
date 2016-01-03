@@ -9,6 +9,7 @@ import DateRangeInputField from "./components/DateRangeInputField";
 import KeywordsInputField from "./components/KeywordsInputField";
 import PermanentLink from "./components/PermanentLink";
 import DataTableView from "./components/DataTableView";
+import ArticleItemTableView from "./components/ArticleItemTableView";
 import Counting from "./utils/counting-keywords"
 import fetchStat from "./utils/fetch-jser-stat";
 import {stateToQuery, queryToState} from "./utils/permanent-util";
@@ -22,7 +23,7 @@ render(
 );
 // get permanent hash
 (() => {
-    let hash = location.hash.replace(/^#/,"");
+    let hash = location.hash.replace(/^#/, "");
     let {
         beginDate,
         endDate,
@@ -80,7 +81,10 @@ fetchStat().then(stat => {
                 />
                 <PermanentLink onClick={changePermanent}/>
                 <LineChart data={chartData}/>
-                <DataTableView data={chartData}/>
+                <div className="DataGridLayout">
+                    <DataTableView data={chartData}/>
+                    <ArticleItemTableView data={chartData}/>
+                </div>
             </div>
         }
     }

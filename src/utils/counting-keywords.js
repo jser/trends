@@ -16,7 +16,7 @@ export default class Counting {
         }
         /**
          * {
-     *  key [{ date, count }]
+     *  key [{ date, count, items }]
      * }
          * */
         let results = {};
