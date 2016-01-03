@@ -10,6 +10,7 @@ import KeywordsInputField from "./components/KeywordsInputField";
 import PermanentLink from "./components/PermanentLink";
 import DataTableView from "./components/DataTableView";
 import ArticleItemTableView from "./components/ArticleItemTableView";
+import ItemURLOverviewTableView from "./components/ItemURLOverviewTableView";
 import Counting from "./utils/counting-keywords"
 import fetchStat from "./utils/fetch-jser-stat";
 import {stateToQuery, queryToState} from "./utils/permanent-util";
@@ -45,7 +46,7 @@ render(
 })();
 // fetch and draw
 fetchStat().then(stat => {
-    let counting = new Counting(stat);
+    const counting = new Counting(stat);
     class App extends React.Component {
         static getStores() {
             return [
@@ -87,6 +88,7 @@ fetchStat().then(stat => {
                 location.hash = stateToQuery(state)
             };
             const chartData = counting.countingKeywords(usedKeywords, this.state.dateStore.beginDate, this.state.dateStore.endDate);
+            const articleURLData = counting.countingItemsByMonth(this.state.dateStore.beginDate, this.state.dateStore.endDate);
             // embed mode => show only Chart
             const embedMode = this.state.displayStore.embedMode;
             if (embedMode) {
@@ -117,6 +119,7 @@ fetchStat().then(stat => {
                     <DataTableView data={chartData}/>
                     <ArticleItemTableView data={chartData}/>
                 </div>
+                <ItemURLOverviewTableView data={articleURLData}/>
             </div>
         }
     }

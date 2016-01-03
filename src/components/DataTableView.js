@@ -16,7 +16,7 @@ export default class DataTableView extends React.Component {
         let dateKeyList = data[keywords[0]].map(({date}) => date);
         let results = dateKeyList.map(dateKey => {
             var dateString = moment(dateKey, "YYYY-MM-DD").format("YYYY-MM");
-            let result = {date: dateString};
+            let result = {"Date": dateString};
             keywords.forEach(keyword => {
                 let dataList = data[keyword];
                 let hitObject = dataList.filter(({date}) => date === dateKey)[0];
