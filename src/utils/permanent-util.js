@@ -6,10 +6,12 @@ export function stateToQuery(state) {
     let beginDate = moment(state.beginDate).format("YYYY-MM-DD");
     let endDate = moment(state.endDate).format("YYYY-MM-DDD");
     let keywords = state.keywords;
+    let embed = state.embed;
     return querystring.stringify({
         beginDate,
         endDate,
-        keywords
+        keywords,
+        embed
     });
 }
 export function queryToState(query) {

@@ -68,7 +68,16 @@ fetchStat().then(stat => {
             let usedKeywords = this.state.keywordsStore.keywords.filter(keyword => {
                 return keyword.length > 0
             });
-            let changePermanent = ()=> {
+            const jumpToEmbedLink = () => {
+                let state = {
+                    beginDate: this.state.dateStore.beginDate,
+                    endDate: this.state.dateStore.endDate,
+                    keywords: this.state.keywordsStore.keywords,
+                    embed: true
+                };
+                location.hash = stateToQuery(state)
+            };
+            const changePermanent = () => {
                 let state = {
                     beginDate: this.state.dateStore.beginDate,
                     endDate: this.state.dateStore.endDate,
@@ -98,7 +107,10 @@ fetchStat().then(stat => {
                                     onUpdateKeywords={keywordsAction.updateKeywords}
                                     onAddKeyword={keywordsAction.addKeyword}
                 />
-                <PermanentLink onClick={changePermanent}/>
+                <div className="PermanentLinkLayout">
+                    <PermanentLink onClick={changePermanent}>Permanent Link</PermanentLink>
+                    <PermanentLink onClick={jumpToEmbedLink}>Embed Link</PermanentLink>
+                </div>
                 <LineChart data={chartData}/>
                 <div className="DataGridLayout">
                     <DataTableView data={chartData}/>

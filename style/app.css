@@ -14,3 +14,7 @@ html, body {
     letter-spacing: -0.02em;
     text-align: center;
 }
+
+.PermanentLinkLayout .PermanentLink {
+    margin-right: .5em;
+}
