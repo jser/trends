@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>existential-default</title>
+</head>
+<body>
+  <script src="existential-default.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var existsDefault = require('existential-default');
+    var hello = null;
+    hello = existsDefault(hello, 'world');
+    console.log(hello);
+  </script>
+</body>
+</html>
